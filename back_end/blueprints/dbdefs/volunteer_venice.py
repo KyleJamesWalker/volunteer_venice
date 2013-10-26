@@ -22,7 +22,7 @@ class VolunteerVeniceSchema(object):
     pass
 
 
-class Org(VolunteerVeniceSchema, VolunteerVencieBase):
+class Organization(VolunteerVeniceSchema, VolunteerVencieBase):
     __tablename__ = 'orgs'
 
     id = Column(Integer, primary_key=True)

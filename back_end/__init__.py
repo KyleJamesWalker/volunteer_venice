@@ -13,19 +13,21 @@ def register_server(url_prefix='', settings={}):
     app.secret_key = SECRET_KEY
 
     app.register_blueprint(vv_blueprint,
-                           url_prefix='{}/'.format(url_prefix))
+                           url_prefix='{}'.format(url_prefix))
 
     @app.before_request
     def before_request():
-        pass
-        #g.db = get_db()
+        local_engine = create_engine("sqlite:///test_db")
+        g.db = scoped_session(sessionmaker(
+            autocommit=False,
+            autoflush=False,
+            bind=local_engine))
 
     @app.teardown_request
     def teardown_request(error=None):
-        pass
-        #if hasattr(g, 'db'):
-        #    g.db.close()
-        #    g.db.remove()
+        if hasattr(g, 'db'):
+            g.db.close()
+            g.db.remove()
 
     @app.after_request
     def after_request(response):
