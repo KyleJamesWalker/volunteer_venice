@@ -1,0 +1,12 @@
+create table orgs(
+        id serial NOT NULL PRIMARY KEY,
+        name text not null,
+        website text,
+	address text,
+	description text,
+	category int,
+	phone_number text,
+	email text,
+	picture_location text,
+	video_location text
+        )
