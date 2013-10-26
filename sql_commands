@@ -1,5 +1,5 @@
 create table orgs(
-        id serial NOT NULL PRIMARY KEY,
+	id NOT NULL PRIMARY KEY,
         name text not null,
         website text,
 	address text,
@@ -9,4 +9,4 @@ create table orgs(
 	email text,
 	picture_location text,
 	video_location text
-        )
+        );
