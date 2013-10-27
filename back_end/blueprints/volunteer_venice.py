@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, current_app, g
 
-from dbdefs.volunteer_venice import Organization, Category
+from ..dbdefs.volunteer_venice import Organization, Category
 
 import traceback
 
