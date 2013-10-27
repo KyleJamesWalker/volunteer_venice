@@ -4,7 +4,7 @@ root.defaultPrefix = "z"
 
 root.buildNumber      = 'undefined'
 root.defaultScheme    = 'http://' # ex: 'undefined' => 'https://'
-root.apiDomain        = 'localhost:5000' # ex: 'localhost:5000' => 'guru.zefr.com'
+root.apiDomain        = 'localhost:5000/api' # ex: 'localhost:5000/api' => 'guru.zefr.com'
 root.googleApiKey     = "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4"
 root.staticFileSuffix = ""
 
