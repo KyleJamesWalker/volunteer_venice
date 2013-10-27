@@ -1,0 +1,61 @@
+{
+	"name"                    : "VolunteerVenice",
+	"version"                 : "0.0.0",
+	"ngApp"                   : "zApp",
+	"environment"             : "local_development",
+	"livereloadPort"          : "35729",
+	"buildDir"                : "build",
+	"almostBuiltDir"          : "almost_built",
+	"builtDir"                : "built",
+	"htmlTarget"              : "index.html",
+	"report"                  : "min",
+	"applicationConfig"       : {
+		"local_development": {
+			"type"            : "development",
+			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"defaultScheme"   : "http://",
+			"apiDomain"       : "localhost:5000",
+			"staticFileDomain": "localhost/static",
+			"staticFileSuffix": ""
+		},
+		"local_production": {
+			"type"            : "production",
+			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"defaultScheme"   : "http://",
+			"apiDomain"       : "localhost:5000",
+			"staticFileDomain": "localhost/static",
+			"staticFileSuffix": ""
+		},
+		"staging": {
+			"type"            : "production",
+			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"defaultScheme"   : "https://",
+			"apiDomain"       : "channelid-staging.apps.zefr.com",
+			"staticFileDomain": "d342jw8zrpy0ey.cloudfront.net",
+			"staticFileSuffix": ".gz"
+		},
+		"production": {
+			"type"            : "production",
+			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"defaultScheme"   : "https://",
+			"apiDomain"       : "channelid.apps.zefr.com",
+			"staticFileDomain": "d2yq3fpckohnci.cloudfront.net",
+			"staticFileSuffix": ".gz"
+		}
+	},
+	"devDependencies": {
+		"grunt-contrib-copy"     : "~0.4.1",
+		"grunt"                  : "~0.4.1",
+		"grunt-contrib-clean"    : "~0.4.1",
+		"grunt-contrib-watch"    : "~0.4.4",
+		"grunt-contrib-sass"     : "~0.4.1",
+		"grunt-contrib-coffee"   : "~0.7.0",
+		"grunt-rename"           : "~0.1.2",
+		"grunt-html-build"       : "~0.2.0",
+		"grunt-bump"             : "0.0.11",
+		"grunt-preprocess"       : "~2.3.0",
+		"grunt-contrib-uglify"   : "~0.2.2",
+		"grunt-contrib-cssmin"   : "~0.6.1",
+		"grunt-contrib-concat"   : "~0.3.0"
+	}
+}
