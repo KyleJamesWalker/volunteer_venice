@@ -4,7 +4,6 @@ engine = create_engine(con_str)#,client_encoding='utf-8')
 
 meta = MetaData()
 orgs_table_name = 'orgs'
-orgs_table = Table(orgs_table_name, meta, autoload=True, autoload_with=engine)
 conn = engine.connect()
 
 def execute_query(query,query_params=None):
@@ -19,5 +18,9 @@ def execute_query(query,query_params=None):
         print(error)
         return error
     finally:
-        if conn is not None:
-            conn.close()
+        # if conn is not None:
+        #     conn.close()
+
+        pass
+def get_org_table():
+    return Table(orgs_table_name, meta, autoload=True, autoload_with=engine)

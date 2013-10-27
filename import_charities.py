@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import csv
 import data
 import codecs
-
+from back_end.dbdefs.volunteer_venice import VolunteerVencieBase
 
 class UTF8Recoder:
     """
@@ -38,6 +38,12 @@ class UnicodeReader:
     def __iter__(self):
         return self
 
+
+
+def make_tables():
+    VolunteerVencieBase.metadata.drop_all(data.engine)
+    VolunteerVencieBase.metadata.create_all(data.engine)
+
 def import_file(file_name):
     orgs = []
     first = True
@@ -52,11 +58,12 @@ def import_file(file_name):
                 'website':row[1],
                 'address':row[2],
                 'description':row[3],
-                'category':row[4],
+                'category_id':row[4],
                 'phone_number':row[5],
                 'email':row[6],
                 'picture_location':row[7],
                 'video_location':row[8],
+                'location_id':int(row[9])
                 }
             orgs.append(org)
 
@@ -66,11 +73,16 @@ def import_file(file_name):
             named_orgs.append(org)
     return named_orgs
 
-
-
-
 def insert_db(orgs):
-    query = data.orgs_table.insert()
+
+    orgs_table = data.get_org_table()
+    query = orgs_table.delete()
+    query_result = data.execute_query(query)
+    if query_result is None or isinstance(query_result,basestring):
+        print(query_result)
+        return query_result
+
+    query = orgs_table.insert()
     query_params = orgs
     query_result = data.execute_query(query,query_params=query_params)
     if query_result is None or isinstance(query_result,basestring):
@@ -79,5 +91,6 @@ def insert_db(orgs):
 
 
 orgs = import_file('VolunteerVenice.csv')
+make_tables()
 insert_db(orgs)
 #print orgs
