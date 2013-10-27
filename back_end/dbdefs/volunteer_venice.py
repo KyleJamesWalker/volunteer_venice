@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, Text
+from sqlalchemy import Column, ForeignKey, Integer, Text
 
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 
 vv_class_reg = {}
@@ -22,6 +23,35 @@ class VolunteerVeniceSchema(object):
     pass
 
 
+class Category(VolunteerVeniceSchema, VolunteerVencieBase):
+    __tablename__ = 'category'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(Text, nullable=False)
+
+    def __repr__(self):
+        return classReprStr("Category",
+                            self.id,
+                            self.name)
+
+
+class Region(VolunteerVeniceSchema, VolunteerVencieBase):
+    __tablename__ = 'region'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(Text)
+
+
+class Location(VolunteerVeniceSchema, VolunteerVencieBase):
+    __tablename__ = 'location'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(Text)
+    region_id = Column(Integer, ForeignKey(Region.id))
+
+    region = relationship(Region, backref=__tablename__)
+
+
 class Organization(VolunteerVeniceSchema, VolunteerVencieBase):
     __tablename__ = 'orgs'
 
@@ -30,11 +60,16 @@ class Organization(VolunteerVeniceSchema, VolunteerVencieBase):
     website = Column(Text)
     address = Column(Text)
     description = Column(Text)
-    category = Column(Integer)
     phone_number = Column(Text)
     email = Column(Text)
     picture_location = Column(Text)
     video_location = Column(Text)
+
+    location_id = Column(Integer, ForeignKey(Location.id))
+    category_id = Column(Integer, ForeignKey(Category.id))
+
+    location = relationship(Location, backref=__tablename__)
+    category = relationship(Category, backref=__tablename__)
 
     def __repr__(self):
         return classReprStr("Org",
@@ -48,15 +83,3 @@ class Organization(VolunteerVeniceSchema, VolunteerVencieBase):
                             self.email,
                             self.picture_location,
                             self.video_location)
-
-
-class Category(VolunteerVeniceSchema, VolunteerVencieBase):
-    __tablename__ = 'category'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(Text, nullable=False)
-
-    def __repr__(self):
-        return classReprStr("Category",
-                            self.id,
-                            self.name)
