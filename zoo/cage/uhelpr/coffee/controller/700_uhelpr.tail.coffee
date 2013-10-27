@@ -21,3 +21,5 @@ root.Uhelpr = class Uhelpr extends root.BaseResolvableController
 		super
 
 		root.$body.removeClass 'not'
+
+		@$currentLocation = @UhelprState.getCurrentLocation()
