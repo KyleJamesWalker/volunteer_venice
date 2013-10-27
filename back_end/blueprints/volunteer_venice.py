@@ -21,7 +21,7 @@ def organization(org_id=None):
                   Organization.website,
                   Organization.address,
                   Organization.description,
-                  Organization.category,
+                  Organization.category_id,
                   Organization.phone_number,
                   Organization.email,
                   Organization.picture_location,
@@ -34,13 +34,15 @@ def organization(org_id=None):
             query_data = query_data.filter(Organization.id == org_id)
 
         result['organization'] = []
+        print query_data
         for x in query_data:
+            print x
             db_result = {'id': x.id,
                          'name': x.name,
                          'website': x.website,
                          'address': x.address,
                          'description': x.description,
-                         'category': x.category,
+                         'category_id': x.category_id,
                          'phone_number': x.phone_number,
                          'email': x.email,
                          'picture_location': x.picture_location,
@@ -50,7 +52,6 @@ def organization(org_id=None):
                 result['organization'].append(db_result)
             else:
                 result = db_result
-
     # Error occurred, add to message.
     except Exception as e:
         result['error'] = dict()
