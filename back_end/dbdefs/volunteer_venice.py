@@ -68,8 +68,8 @@ class Organization(VolunteerVeniceSchema, VolunteerVeniceBase):
     location_id = Column(Integer, ForeignKey(Location.id))
     category_id = Column(Integer, ForeignKey(Category.id))
 
-    location = relationship(Location, backref=__tablename__)
-    category = relationship(Category, backref=__tablename__)
+    location = relationship("Location", backref="Organization")
+    category = relationship("Category", backref="Organization")
 
     def __repr__(self):
         return classReprStr("Org",

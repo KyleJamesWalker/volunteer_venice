@@ -16,19 +16,7 @@ def organization(org_id=None):
     result = dict()
 
     try:
-        feilds = [Organization.id,
-                  Organization.name,
-                  Organization.website,
-                  Organization.address,
-                  Organization.description,
-                  Organization.category_id,
-                  Organization.phone_number,
-                  Organization.email,
-                  Organization.picture_location,
-                  Organization.video_location,
-                  ]
-
-        query_data = g.db.query(*feilds).order_by(Organization.id)
+        query_data = g.db.query(Organization).order_by(Organization.id)
 
         if org_id is not None:
             query_data = query_data.filter(Organization.id == org_id)
@@ -45,6 +33,7 @@ def organization(org_id=None):
                          'email': x.email,
                          'picture_location': x.picture_location,
                          'video_location': x.video_location,
+                         'location': x.location.name if x.location else None,
                          }
             if org_id is None:
                 result['organization'].append(db_result)
