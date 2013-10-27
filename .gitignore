@@ -1,4 +1,4 @@
 .project
 .pydevproject
 *.pyc
-*.pyctest_db
+test_db
