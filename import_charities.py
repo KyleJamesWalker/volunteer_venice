@@ -25,9 +25,11 @@ class UnicodeReader:
     which is encoded in the given encoding.
     """
 
+
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         f = UTF8Recoder(f, encoding)
-        self.reader = csv.reader(f, dialect=dialect, **kwds)
+        #self.reader = csv.reader(f, dialect=dialect, **kwds)
+        self.reader = csv.reader(f, delimiter=b',',quotechar=b'"', **kwds)
 
     def next(self):
         row = self.reader.next()
@@ -45,14 +47,6 @@ def import_file(file_name):
             if first:
                 first = False
                 continue
-            if len(row) < 9:
-                row = row + [None]*(9-len(row))
-            clean_row = []
-            for item in row:
-                if isinstance(item,basestring) and item == '':
-                    clean_row.append(None)
-                clean_row.append(item)
-            row = clean_row
             org = {
                 'name': row[0],
                 'website':row[1],
@@ -61,8 +55,8 @@ def import_file(file_name):
                 'category':row[4],
                 'phone_number':row[5],
                 'email':row[6],
-                'picture_locations':row[7],
-                'video_locations':row[8],
+                'picture_location':row[7],
+                'video_location':row[8],
                 }
             orgs.append(org)
 

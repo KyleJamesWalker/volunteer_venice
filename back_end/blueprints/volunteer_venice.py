@@ -14,16 +14,34 @@ def organization(org_id=None):
     result = dict()
 
     try:
-        query_data = g.db.query(Organization.id,
-                                Organization.name,
-                                Organization.address). \
+
+        query_data = g.db.query(
+            Organization.id,
+            Organization.name,
+            Organization.website,
+            Organization.address,
+            Organization.description,
+            Organization.category,
+            Organization.phone_number,
+            Organization.email,
+            Organization.picture_location,
+            Organization.video_location). \
             order_by(Organization.id)
+
 
         result['organization'] = []
         for x in query_data:
-            result['organization'].append({'id': x.id,
-                                           'name': x.name,
-                                           'address': x.address})
+            result['organization'].append({'id' : x.id,
+                                           'name' : x.name,
+                                           'website' : x.website,
+                                           'address' : x.address,
+                                           'description' : x.description,
+                                           'category' : x.category,
+                                           'phone_number' : x.phone_number,
+                                           'email' : x.email,
+                                           'picture_location' : x.picture_location,
+                                           'video_location' : x.video_location,
+                                           })
 
     # Error occurred, add to message.
     except Exception as e:
