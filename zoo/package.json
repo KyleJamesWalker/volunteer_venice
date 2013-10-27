@@ -15,7 +15,7 @@
 			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
 			"defaultScheme"   : "http://",
 			"apiDomain"       : "localhost:5000",
-			"staticFileDomain": "localhost:5000/static",
+			"staticFileDomain": "localhost/static",
 			"staticFileSuffix": ""
 		},
 		"local_production": {
@@ -23,7 +23,7 @@
 			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
 			"defaultScheme"   : "http://",
 			"apiDomain"       : "localhost:5000",
-			"staticFileDomain": "localhost:5000/static",
+			"staticFileDomain": "localhost/static",
 			"staticFileSuffix": ""
 		},
 		"staging": {

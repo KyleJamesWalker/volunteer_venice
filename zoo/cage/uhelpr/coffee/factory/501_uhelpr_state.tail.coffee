@@ -16,8 +16,7 @@ root.UhelprState = class UhelprState extends root.BaseFactory
 
 		@$_stats = new root.Stats @$injector
 
-		@$locations = {}
-		@$currentLocation = null
+		@$currentLocation = 'Venice Beach'
 
 	initialize: =>
 		return if @initialized
