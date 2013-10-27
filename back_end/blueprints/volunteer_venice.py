@@ -28,6 +28,7 @@ def organization(org_id=None):
             Organization.video_location). \
             order_by(Organization.id)
 
+
         result['organization'] = []
         for x in query_data:
             result['organization'].append({'id' : x.id,
