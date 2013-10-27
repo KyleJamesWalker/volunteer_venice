@@ -28,20 +28,20 @@ def organization(org_id=None):
             Organization.video_location). \
             order_by(Organization.id)
 
-
         result['organization'] = []
         for x in query_data:
-            result['organization'].append({'id' : x.id,
-                                           'name' : x.name,
-                                           'website' : x.website,
-                                           'address' : x.address,
-                                           'description' : x.description,
-                                           'category' : x.category,
-                                           'phone_number' : x.phone_number,
-                                           'email' : x.email,
-                                           'picture_location' : x.picture_location,
-                                           'video_location' : x.video_location,
-                                           })
+            result['organization'].append({
+                'id': x.id,
+                'name': x.name,
+                'website': x.website,
+                'address': x.address,
+                'description': x.description,
+                'category': x.category,
+                'phone_number': x.phone_number,
+                'email': x.email,
+                'picture_location': x.picture_location,
+                'video_location': x.video_location,
+            })
 
     # Error occurred, add to message.
     except Exception as e:
