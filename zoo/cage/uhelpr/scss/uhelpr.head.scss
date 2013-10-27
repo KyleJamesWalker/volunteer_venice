@@ -1,0 +1,54 @@
+@import "partial/common";
+
+@import "partial/animations";
+
+@import "partial/structure"; // this is all the common styling among all web apps
+
+// @include declare-theme( ( 'default-header',     false,  $header-primary-colors,    $orange-secondary-colors,  $header-shadow-theming,  $header-border-theming,            false ) );
+
+$branding-img-size: 48px / $base-font-size * 1em; // This is actually arbitrary
+$nav-width: 11em; // 220px / $base-font-size * 1em; // This is also arbitrary
+
+body {
+	header {
+		.branding {
+			width: $branding-img-size;
+			> div {
+				// These two will make this square, and always the same width as its parent
+				padding-top    : 100%;
+				width          : 100%;
+
+				background-size: 100% 100%;
+				@include background-size( cover );
+				background-position: center;
+			}
+		}
+	}
+
+	.nav-width {
+		width: $nav-width;
+	}
+} 
+
+.analytics .competition {
+	.facebook-link {
+		@include when-hovered {
+			color: rgb( 59, 89, 152 ); // facebook blue
+		}
+	}
+	.twitter-link {
+		@include when-hovered {
+			color: rgb( 0, 172, 238 ); // twitter blue
+		}
+	}
+	.instagram-link {
+		@include when-hovered {
+			color: rgb( 151, 96, 78 ); // instagram brown
+		}
+	}
+	.youtube-link {
+		@include when-hovered {
+			color: rgb( 196, 48, 43 ); // youtube red
+		}
+	}
+}

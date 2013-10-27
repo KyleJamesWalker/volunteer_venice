@@ -1,0 +1,41 @@
+<!-- @if ENGINE='python' -->
+{%raw%}
+<!-- @endif -->
+<!doctype html>
+<html ng-app="<!-- @echo NGAPP -->" class="relative whole-height">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="format-detection" content="telephone=no" /><!-- Prevents numbers from being accidentally interpretted as a dialable number. -->
+	<!-- <meta name="viewport" content="width=768" /> -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+	<!-- <meta name="apple-mobile-web-app-capable" content="yes" /> --> <!-- Makes the page have a 'Add to Homescreen' option in the popout menu. -->
+	<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black" /> --> <!-- Changes the style of the bar that has time and whatnot. -->
+	<!-- <meta name="robots" content="noindex, nofollow" /> --> <!-- For development purposes, prevents robots from indexing us, just in case it's somehow public. -->
+	<!-- <link rel="apple-touch-icon-precomposed" href="images/icon.png" /> --> <!-- Explicitly defines the image used for as the site's icon if added to the homescreen. -->
+	
+	<!-- build:style head -->
+	<!-- /build -->
+
+	<!-- build:script head -->
+	<!-- /build -->
+	
+	<script type="text/javascript" src="//use.typekit.net/qsz5dms.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body class="not loaded relative whole-height">
+	<!-- build:style body -->
+	<!-- /build -->
+
+	<div ui-view class="relative whole-width whole-height"></div>
+
+	<!-- build:script tail -->
+	<!-- /build -->
+
+	<!-- @if ENVIRONMENT='development' -->
+	<script src="http://localhost:<!-- @echo LIVERELOADPORT -->/livereload.js"></script>
+	<!-- @endif -->
+
+</body>
+<!-- @if ENGINE='python' -->
+{%endraw%}
+<!-- @endif -->
