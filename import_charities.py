@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import csv
 import data
 import codecs
-from back_end.dbdefs.volunteer_venice import VolunteerVencieBase
+from back_end.dbdefs.volunteer_venice import VolunteerVeniceBase
 
 class UTF8Recoder:
     """
@@ -41,8 +41,8 @@ class UnicodeReader:
 
 
 def make_tables():
-    VolunteerVencieBase.metadata.drop_all(data.engine)
-    VolunteerVencieBase.metadata.create_all(data.engine)
+    VolunteerVeniceBase.metadata.drop_all(data.engine)
+    VolunteerVeniceBase.metadata.create_all(data.engine)
 
 def import_file(file_name):
     orgs = []

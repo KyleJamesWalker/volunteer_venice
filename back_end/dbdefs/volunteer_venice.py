@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 
 
 vv_class_reg = {}
-VolunteerVencieBase = declarative_base(class_registry=vv_class_reg)
+VolunteerVeniceBase = declarative_base(class_registry=vv_class_reg)
 
 
 def classReprStr(class_name, *args):
@@ -23,7 +23,7 @@ class VolunteerVeniceSchema(object):
     pass
 
 
-class Category(VolunteerVeniceSchema, VolunteerVencieBase):
+class Category(VolunteerVeniceSchema, VolunteerVeniceBase):
     __tablename__ = 'category'
 
     id = Column(Integer, primary_key=True)
@@ -35,14 +35,14 @@ class Category(VolunteerVeniceSchema, VolunteerVencieBase):
                             self.name)
 
 
-class Region(VolunteerVeniceSchema, VolunteerVencieBase):
+class Region(VolunteerVeniceSchema, VolunteerVeniceBase):
     __tablename__ = 'region'
 
     id = Column(Integer, primary_key=True)
     name = Column(Text)
 
 
-class Location(VolunteerVeniceSchema, VolunteerVencieBase):
+class Location(VolunteerVeniceSchema, VolunteerVeniceBase):
     __tablename__ = 'location'
 
     id = Column(Integer, primary_key=True)
@@ -52,7 +52,7 @@ class Location(VolunteerVeniceSchema, VolunteerVencieBase):
     region = relationship(Region, backref=__tablename__)
 
 
-class Organization(VolunteerVeniceSchema, VolunteerVencieBase):
+class Organization(VolunteerVeniceSchema, VolunteerVeniceBase):
     __tablename__ = 'orgs'
 
     id = Column(Integer, primary_key=True)
