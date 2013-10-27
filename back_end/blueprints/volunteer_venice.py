@@ -34,9 +34,7 @@ def organization(org_id=None):
             query_data = query_data.filter(Organization.id == org_id)
 
         result['organization'] = []
-        print query_data
         for x in query_data:
-            print x
             db_result = {'id': x.id,
                          'name': x.name,
                          'website': x.website,
