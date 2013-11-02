@@ -12,7 +12,7 @@
 	"applicationConfig"       : {
 		"local_development": {
 			"type"            : "development",
-			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"googleApiKey"    : "AIzaSyAg4hv1KgXt84gFjk4xQU4bG-NFX5hi2Ro",
 			"defaultScheme"   : "http://",
 			"apiDomain"       : "localhost:5000/api",
 			"staticFileDomain": "localhost/static",
@@ -20,7 +20,7 @@
 		},
 		"local_production": {
 			"type"            : "production",
-			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"googleApiKey"    : "AIzaSyAg4hv1KgXt84gFjk4xQU4bG-NFX5hi2Ro",
 			"defaultScheme"   : "http://",
 			"apiDomain"       : "localhost:5000/api",
 			"staticFileDomain": "localhost/static",
@@ -28,7 +28,7 @@
 		},
 		"staging": {
 			"type"            : "production",
-			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"googleApiKey"    : "AIzaSyAg4hv1KgXt84gFjk4xQU4bG-NFX5hi2Ro",
 			"defaultScheme"   : "https://",
 			"apiDomain"       : "channelid-staging.apps.zefr.com",
 			"staticFileDomain": "d342jw8zrpy0ey.cloudfront.net",
@@ -36,7 +36,7 @@
 		},
 		"production": {
 			"type"            : "production",
-			"googleApiKey"    : "AIzaSyCutrVvQ_D7xVZpPOp7sWjCrhC-AFpFco4",
+			"googleApiKey"    : "AIzaSyAg4hv1KgXt84gFjk4xQU4bG-NFX5hi2Ro",
 			"defaultScheme"   : "https://",
 			"apiDomain"       : "channelid.apps.zefr.com",
 			"staticFileDomain": "d2yq3fpckohnci.cloudfront.net",

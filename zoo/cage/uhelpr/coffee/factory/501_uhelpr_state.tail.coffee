@@ -9,6 +9,7 @@ root.UhelprState = class UhelprState extends root.BaseFactory
 		'$rootScope'
 		root.OrganizationRequester
 		root.LocationRequester
+		root.GoogleMapsApi
 	]
 
 	constructor: ->
@@ -25,11 +26,21 @@ root.UhelprState = class UhelprState extends root.BaseFactory
 		return if @initialized
 		@initialized = yes
 
-		@$organizations = @OrganizationRequester.getAll()
-		@$locations     = @LocationRequester.getAll()
+		@getResources()
+
+	getResources: ->
+		@$_stats.addPending()
+
+		@$q.all( [
+			( @$organizations = @OrganizationRequester.getAll() ).$promise
+			( @$locations     = @LocationRequester.getAll() ).$promise
+		] ).then(
+			=> @$_stats.pendingResolved()
+			=> @$_stats.pendingRejected()
+		)
 
 	getAllPendingResults: =>
-		@$_stats.pendingResults
+		@$q.all [ @$_stats.pendingResults, @GoogleMapsApi.mapsApiLoadedPromise ]
 
 	getCurrentLocation: ->
 		@$locations[ 0 ]
