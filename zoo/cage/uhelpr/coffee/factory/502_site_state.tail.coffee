@@ -45,8 +45,13 @@ root.SiteState = class SiteState extends root.BaseFactory
 			( @$organizations = @OrganizationRequester.getAll() ).$_promise
 			( @$locations     = @LocationRequester    .getAll() ).$_promise
 		] ).then(
+
 			=> @$_stats.pendingResolved()
-			=> @$_stats.pendingRejected()
+
+			=>
+				@$_stats.pendingRejected()
+				# fakeOrgCount = 15
+				# @$organizations = ( new root.Organization() while --fakeOrgCount )
 		)
 
 	getAllPendingResults: =>

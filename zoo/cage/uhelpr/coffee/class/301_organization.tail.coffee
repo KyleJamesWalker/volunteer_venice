@@ -1,5 +1,7 @@
 root = window
 
+lastOrganizationId = 0
+
 root.Organization = class Organization extends root.UhelprResource
 
 	$_propertyToJsonMapping:
@@ -16,18 +18,18 @@ root.Organization = class Organization extends root.UhelprResource
 		website    : 'website' # "http://www.lapl.org/branches/venice"
 
 	constructor: (
-		@address     = null # "501 S. Venice Blvd.",
-		@categoryId  = null # "Arts and Education",
-		@description = null # "",
-		@email       = null # "",
-		@id          = null # 1,
-		@location    = null # null,
-		@name        = null # "Abbot Kinney Memorial Library",
-		@phoneNumber = null # "310.821.1769",
-		@image       = null # "",
-		@video       = null # "",
-		@website     = null # "http://www.lapl.org/branches/venice"
+		@address     = null # '501 S. Venice Blvd.' # 
+		@categoryId  = null # 'Arts and Education' # 
+		@description = null # '' # 
+		@email       = null # '' # 
+		@id          = null # lastOrganizationId++ # 
+		@location    = null # null # 
+		@name        = null # "Abbot Kinney Memorial Library (Fake \##{ lastOrganizationId })" # 
+		@phoneNumber = null # '310.821.1769' # 
+		@image       = null # '' # 
+		@video       = null # '' # 
+		@website     = null # 'http://www.lapl.org/branches/venice' # 
 	) -> super
 
 	$_initNonJsonMembers: ->
-		@image = "#{ root.imgPath }#{ _.random( 1, 8 ) }.jpg" unless @image?.length
+		@image = "#{ root.imgPath }#{ _.random( 1, 8 ) }.jpg" unless @image?.length > 0

@@ -17,9 +17,13 @@
 	<div class="relative">
 		<div
 			class     ="padded"
+			ng-class  ="{ collapsed: Organizations.mappedOrganization.id && Organizations.mappedOrganization.id != organization.id }"
 			ng-repeat ="organization in SiteState.$organizations"
 		>
-			<z-organization organization="organization" />
+			<z-organization
+				organization        ="organization"
+				on-map-organization ="Organizations.mappedOrganization = organization"
+			></z-organization>
 		</div>
 	</div>
 

@@ -11,6 +11,7 @@ class Organization extends root.BaseDirective
 	controller: OrganizationController
 
 	scope:
-		organization: '='
+		organization     : '='
+		onMapOrganization: '&'
 
 root.addDirective Organization

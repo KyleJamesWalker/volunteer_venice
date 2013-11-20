@@ -10,23 +10,23 @@
 				class    ="slow transitions"
 				ng-class ="{ 'more lr-margin': ! organization.selected }"
 			>
+
+				<z-image
+					src         ="{[{ organization.image }]}"
+					class       ="absolute whole-height slow transitions"
+					image-class ="{
+						'button-shadow slow transitions': true,
+						'whole-rounded'                 : ! organization.selected,
+						't-rounded'                     : organization.selected
+					}"
+				></z-image>
+
 				<div class="relative">
-
-					<z-image
-						src         ="{[{ organization.image }]}"
-						class       ="absolute whole-height slow transitions"
-						image-class ="{
-							'button-shadow slow transitions': true,
-							'whole-rounded'                 : ! organization.selected,
-							't-rounded'                     : organization.selected
-						}"
-					></z-image>
-
 					<div class="relative title h3 b text-shadowed nowrap overflow-ellipsis">
 						{[{ organization.name }]}
 					</div>
-
 				</div>
+
 			</div>
 		</header>
 

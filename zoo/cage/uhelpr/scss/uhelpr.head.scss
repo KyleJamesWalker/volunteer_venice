@@ -10,7 +10,7 @@ $organization-header-height: 4 * $base-font-size;
 	header {
 		height: $organization-header-height;
 
-		&, * { line-height: $organization-header-height; }
+		line-height: $organization-header-height;
 
 		.title {
 			margin-left: $organization-header-height / 2;
@@ -22,7 +22,7 @@ $organization-header-height: 4 * $base-font-size;
 	}
 
 	article {
-		height: 0em;
+		height: $organization-header-height * 0;
 	}
 
 	.active {
@@ -34,6 +34,14 @@ $organization-header-height: 4 * $base-font-size;
 
 		article {
 			height: $organization-header-height * 2;
+
+			.collapsed & {
+				height: $organization-header-height * 0;
+			}
 		}
+	}
+
+	.collapsed & {
+		margin-top: - $organization-header-height;
 	}
 }
