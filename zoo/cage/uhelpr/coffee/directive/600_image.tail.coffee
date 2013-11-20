@@ -32,6 +32,9 @@ class Image extends root.BaseDirective
 	controller: ImageController
 
 	scope:
-		src: '@'
+		src       : '@'
+		imageClass: '='
+
+	notIsolated: yes
 
 root.addDirective Image

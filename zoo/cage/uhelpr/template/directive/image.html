@@ -2,6 +2,7 @@
 
 	<div
 		class    ="absolute tl whole-width whole-height"
+		ng-class ="imageClass"
 		ng-style ="{
 			'background-image'   : ImageController.src,
 			'background-size'    : 'cover',
@@ -10,8 +11,8 @@
 	></div>
 
 	<div
-		class    ="absolute tl whole-width whole-height slow transitions"
-		ng-class="{ transparent: ! ImageController.switching }"
+		class    ="absolute tl whole-width whole-height slow transitions {[{ ( ! ImageController.switching ) && 'transparent' || '' }]}"
+		ng-class ="imageClass"
 		ng-style ="{
 			'background-image'   : ImageController.nextSrc,
 			'background-size'    : 'cover',

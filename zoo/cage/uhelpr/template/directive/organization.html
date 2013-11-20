@@ -1,5 +1,44 @@
 <div class="organization">
-	<h4 class="light wide text-shadowed inverse coloring no-background b">
-		{[{ organization.name }]}
-	</h4>
+	<div
+		class    ="tb-margin slow transitions"
+		ng-click ="organization.selected = !!! organization.selected"
+		ng-class="{ 'active more': organization.selected }"
+	>
+
+		<header class="link relative above inverse coloring no-background">
+			<div
+				class    ="slow transitions"
+				ng-class ="{ 'more lr-margin': ! organization.selected }"
+			>
+				<div class="relative">
+
+					<z-image
+						src         ="{[{ organization.image }]}"
+						class       ="absolute whole-height slow transitions"
+						image-class ="{
+							'button-shadow slow transitions': true,
+							'whole-rounded'                 : ! organization.selected,
+							't-rounded'                     : organization.selected
+						}"
+					></z-image>
+
+					<div class="relative title h3 b text-shadowed nowrap overflow-ellipsis">
+						{[{ organization.name }]}
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+		<article
+			class    ="slow transitions overflow-scroll b-rounded more relative coloring"
+			ng-class ="{
+				'shadow padded': organization.selected,
+				'transparent'  : ! organization.selected
+			}"
+		>
+			{[{ organization.description || "(Sorry about this. This organization hasn't provided a description.)" }]}
+		</article>
+
+	</div>
 </div>

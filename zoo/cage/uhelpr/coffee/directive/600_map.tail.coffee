@@ -8,13 +8,14 @@ class MapController extends root.BaseDirectiveController
 	constructor: ->
 		super
 
-		@GoogleMapsApi.makeMap( @$element[ 0 ], disableDefaultUI: yes ).then ( @map ) =>
+		@$scope.map = @GoogleMapsApi.makeMap( @$element[ 0 ], disableDefaultUI: yes ).then ( map ) => @$scope.map = map
 
 class Map extends root.BaseDirective
 	$_name: 'Map'
 
-	restrict: 'A'
-
 	controller: MapController
+
+	scope:
+		map: '='
 
 root.addDirective Map

@@ -1,8 +1,15 @@
 <div z-scrolling-container class="absolute tl whole-width whole-height darker coloring overflow-scroll">
 
-	<z-header class="fixed tl whole-width above">
+	<z-header class="fixed way-above tl whole-width above shadow deep-shadow-when-hovered transitions">
+
 		<div class="absolute tl whole-width whole-height darker coloring barely-transparent">
 		</div>
+
+		<z-image
+			class ="absolute tl whole-width whole-height"
+			src   ="{[{ SiteState.$currentOrganization.image }]}"
+		></z-image>
+
 	</z-header>
 
 	<z-header class="invisible">

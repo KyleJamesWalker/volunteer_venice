@@ -15,7 +15,7 @@
 			"googleApiKey"    : "AIzaSyAg4hv1KgXt84gFjk4xQU4bG-NFX5hi2Ro",
 			"defaultScheme"   : "http://",
 			"apiDomain"       : "localhost:5000/api",
-			"staticFileDomain": "localhost:5000/build/built",
+			"staticFileDomain": "localhost",
 			"staticFileSuffix": ""
 		},
 		"local_production": {
