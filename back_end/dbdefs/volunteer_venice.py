@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, Text
+from sqlalchemy import Column, ForeignKey, Integer, Text, Numeric
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -47,6 +47,8 @@ class Location(VolunteerVeniceSchema, VolunteerVeniceBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(Text)
+    lat = Column(Numeric)
+    lon = Column(Numeric)
     region_id = Column(Integer, ForeignKey(Region.id))
 
     region = relationship(Region, backref=__tablename__)

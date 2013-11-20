@@ -37,6 +37,18 @@ def register_server(url_prefix='', settings={}):
 
         return response
 
+    @app.route('/location')
+    def organization(org_id=None):
+        result = {
+            'location': [
+                {
+                    'name': 'Venice Beach',
+                    'lat_lon': {'lat': 33.9908, 'lon': 118.459}
+                }
+            ]
+        }
+        return jsonify(result)
+
     @app.errorhandler(404)
     def page_not_found(e):
         return "Error: Invalid API Path", 404
