@@ -38,7 +38,7 @@ def register_server(url_prefix='', settings={}):
         return response
 
     @app.route('/location')
-    def organization(org_id=None):
+    def location():
         result = {
             'location': [
                 {
