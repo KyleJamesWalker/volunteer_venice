@@ -37,7 +37,7 @@ def register_server(url_prefix='', settings={}):
 
         return response
 
-    @app.route('/location')
+    @app.route('{}/location'.format(url_prefix))
     def location():
         result = {
             'location': [
