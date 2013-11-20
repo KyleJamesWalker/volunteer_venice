@@ -2,3 +2,5 @@
 .pydevproject
 *.pyc
 test_db
+uhelpr.access.log
+uhelpr.error.log
