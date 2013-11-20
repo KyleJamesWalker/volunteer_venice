@@ -1,2 +1,7 @@
 flask
 sqlalchemy
+requests
+pytz
+python-dateutil
+lxml
+git+ssh://git@github.com/ZEFR-INC/brain_utils

@@ -5,7 +5,8 @@ import csv
 import data
 import codecs
 from back_end.dbdefs.volunteer_venice import VolunteerVeniceBase
-
+from videolab import youtube_tools
+ytools = youtube_tools.YoutubeTools()
 
 class UTF8Recoder:
     """
@@ -19,7 +20,6 @@ class UTF8Recoder:
 
     def next(self):
         return self.reader.next().encode("utf-8")
-
 
 class UnicodeReader:
     """
@@ -42,6 +42,12 @@ def make_tables():
     VolunteerVeniceBase.metadata.drop_all(data.engine)  # @UndefinedVariable
     VolunteerVeniceBase.metadata.create_all(data.engine)  # @UndefinedVariable
 
+def random_vid_ids():
+    while True:
+        vids = ytools.get_channel_uploaded_videos('deepskyvideos')
+        for vid in vids:
+            yield vid.yt_video_id
+    return
 
 def import_file(file_name):
     orgs = []
@@ -67,11 +73,14 @@ def import_file(file_name):
             orgs.append(org)
 
     named_orgs = []
+    random_vid_ids_gen = random_vid_ids()
     for org in orgs:
+        if org['video_location'] == '' or org['video_location'] is None:
+            org['video_location'] = random_vid_ids_gen.next()
+            print('adding random vid id:'+org['video_location'])
         if org['name'] is not None and org['name'] != '':
             named_orgs.append(org)
     return named_orgs
-
 
 def insert_db(orgs):
 
