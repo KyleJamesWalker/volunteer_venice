@@ -10,7 +10,7 @@ $organization-header-height: 4 * $base-font-size;
 	header {
 		height: $organization-header-height;
 
-		line-height: $organization-header-height;
+		&, * { line-height: $organization-header-height; }
 
 		.title {
 			margin-left: $organization-header-height / 2;
