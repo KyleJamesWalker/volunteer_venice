@@ -1,0 +1,22 @@
+<div class="image relative">
+
+	<div
+		class    ="absolute tl whole-width whole-height"
+		ng-style ="{
+			'background-image'   : ImageController.src,
+			'background-size'    : 'cover',
+			'background-position': 'center'
+		}"
+	></div>
+
+	<div
+		class    ="absolute tl whole-width whole-height slow transitions"
+		ng-class="{ transparent: ! ImageController.switching }"
+		ng-style ="{
+			'background-image'   : ImageController.nextSrc,
+			'background-size'    : 'cover',
+			'background-position': 'center'
+		}"
+	></div>
+
+</div>

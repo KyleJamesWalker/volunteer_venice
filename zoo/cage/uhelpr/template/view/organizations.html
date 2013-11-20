@@ -1,0 +1,22 @@
+<div class="organizations absolute whole-width whole-height">
+
+	<div class="fixed tl whole-width whole-height">
+		<z-image
+			class ="absolute tl whole-width whole-height mostly-transparent"
+			src   ="{[{ SiteState.$currentOrganization.image }]}"
+		></z-image>
+	</div>
+
+	<div class="fixed tl whole-width whole-height">
+		<div z-map class="absolute tl whole-width whole-height mostly-transparent">
+		</div>
+	</div>
+
+	<z-centered-div
+		class="relative whole-width height-ratio-1-2"
+		ng-repeat="organization in SiteState.$organizations"
+	>
+		<z-organization organization="organization" />
+	</z-centered-div>
+
+</div>

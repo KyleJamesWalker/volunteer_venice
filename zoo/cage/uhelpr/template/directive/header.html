@@ -1,0 +1,25 @@
+<div class="header relative">
+
+	<div ng-transclude>
+	</div>
+
+	<h3
+		ng-mouseenter ="HeaderController.hovered = true"
+		ng-mouseleave ="HeaderController.hovered = false"
+		class         ="
+			relative 
+			light very-wide text-shadowed inverse coloring no-background b
+			transitions padded shadow-when-hovered
+		"
+		ng-class="{
+			more: HeaderController.hovered,
+			less: ! HeaderController.hovered
+		}"
+	>
+		uHelpr
+		<span ng-if ="SiteState.$currentLocation">
+			&nbsp;of {[{ SiteState.$currentLocation.name }]}
+		</span>
+	</h3>
+
+</div>
