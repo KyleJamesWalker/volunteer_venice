@@ -14,7 +14,31 @@
 			class          ="absolute tl whole-width whole-height"
 			markers        ="SiteState.getMarkerOptions( organization ) for organization in SiteState.$organizations"
 		>
-			{[{ organization.name }]}
+			<div class="clearfix">
+
+				<z-image
+					class ="absolute tl br no-overflow rounded inset-shadow"
+					src   ="{[{ organization.image }]}"
+				></z-image>
+
+				<div class="relative no-overflow rounded inset-shadow less padded">
+
+					<div class="rounded shadow mostly sheer text-shadowed less padded b-margin">
+						<h1 class="inverse coloring no-background">
+							{[{ organization.name }]}
+						</h1>
+					</div>
+
+					<div
+						class ="coloring rounded shadow less padded"
+						ng-if ="organization.description.length"
+					>
+						{[{ organization.description }]}
+					</div>
+
+				</div>
+
+			</div>
 		</z-map>
 		<!-- mostly-transparent -->
 	</div>
