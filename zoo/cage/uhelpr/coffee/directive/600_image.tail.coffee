@@ -24,10 +24,8 @@ class ImageController extends root.BaseDirectiveController
 
 		@switching = no
 
-class Image extends root.BaseDirective
+class Image extends root.BaseTemplatedDirective
 	$_name: 'Image'
-
-	templateUrl: 'image.html'
 
 	controller: ImageController
 

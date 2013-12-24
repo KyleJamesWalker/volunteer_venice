@@ -1,6 +1,6 @@
 root = window
 
-root.SiteConfig = class SiteConfig extends root.ConfigBlock
+root.SiteConfig = class SiteConfig extends root.StatefulConfigBlock
 
 	$_dependencies: [ '$urlRouterProvider' ]
 
@@ -15,11 +15,11 @@ root.SiteConfig = class SiteConfig extends root.ConfigBlock
 
 		@addState 'organizations',
 			parent     : 'site'
-			url        : "^/organizations"
+			url        : "/organizations"
 			templateUrl: "organizations.html"
 			controller : root.Organizations
 
 	setupInterceptors: ->
-		@addHighestPrecedenceInterceptor root.CommunicationInterceptor::$_makeName()
+		@addHighestPrecedenceInterceptor root.CommunicationInterceptor
 
 root.addConfigBlock SiteConfig

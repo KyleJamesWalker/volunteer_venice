@@ -29,7 +29,7 @@ root.SiteState = class SiteState extends root.BaseFactory
 		@getResources()
 
 		@getAllPendingResults().then =>
-			@$currentLocation     = @$locations[ 0 ] or new root.Location 'Venice Beach'
+			@$currentLocation = @$locations[ 0 ] or new root.Location 'Venice Beach'
 
 			currentOrganizationIndex = -1
 			setInterval(
@@ -55,9 +55,14 @@ root.SiteState = class SiteState extends root.BaseFactory
 		)
 
 	getAllPendingResults: =>
-		@$q.all [ @$_stats.pendingResults, @GoogleMapsApi.mapsApiLoadedPromise ]
+		@$q.all [ @GoogleMapsApi.getAllPendingResults(), @$_stats.pendingResults ]
 
 	getCurrentLocation: ->
 		@$currentLocation
+
+	getMarkerOptions: ( organization ) ->
+		markerOptions =
+			title   : organization.name
+			position: @GoogleMapsApi.geocodeAddress( organization.address, @$currentLocation.position ).then ( geocoderResults ) -> markerOptions.position = geocoderResults[ 0 ]?.geometry.location
 
 root.addFactory SiteState

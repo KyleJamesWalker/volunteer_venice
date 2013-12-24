@@ -9,12 +9,21 @@
 
 	<div class="fixed tl whole-width whole-height">
 		<z-map
-			map   ="Organizations.map"
-			class ="absolute tl whole-width whole-height mostly-transparent"
-		></z-map>
+			map            ="Organizations.map"
+			center-lat-lng ="Organizations.$currentLatLng"
+			class          ="absolute tl whole-width whole-height"
+			markers        ="SiteState.getMarkerOptions( organization ) for organization in SiteState.$organizations"
+		>
+			{[{ organization.name }]}
+		</z-map>
+		<!-- mostly-transparent -->
 	</div>
 
 	<div class="relative">
+		Latitude: {[{ Organizations.$currentLatLng.lat }]}, longititude: {[{ Organizations.$currentLatLng.lng }]}
+	</div>
+
+	<!-- <div class="relative">
 		<div
 			class     ="padded"
 			ng-class  ="{ collapsed: Organizations.mappedOrganization.id && Organizations.mappedOrganization.id != organization.id }"
@@ -25,6 +34,6 @@
 				on-map-organization ="Organizations.mappedOrganization = organization"
 			></z-organization>
 		</div>
-	</div>
+	</div> -->
 
 </div>

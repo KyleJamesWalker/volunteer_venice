@@ -5,12 +5,10 @@ class HeaderController extends root.BaseDirectiveController
 
 	hovered: no
 
-class Header extends root.BaseDirective
+class Header extends root.BaseTemplatedDirective
 	$_name: 'Header'
 
 	transclude: yes
-
-	templateUrl: 'header.html'
 
 	controller: HeaderController
 

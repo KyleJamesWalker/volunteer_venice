@@ -3,10 +3,8 @@ root = window
 class OrganizationController extends root.BaseDirectiveController
 	$_name: 'OrganizationController'
 
-class Organization extends root.BaseDirective
+class Organization extends root.BaseTemplatedDirective
 	$_name: 'Organization'
-
-	templateUrl: 'organization.html'
 
 	controller: OrganizationController
 

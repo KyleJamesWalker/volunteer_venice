@@ -1,14 +1,20 @@
 root = window
 
 root.Location = class Location extends root.UhelprResource
+	$_name: 'Location'
 
 	$_propertyToJsonMapping:
 		name: 'name'
-		lat : 'lat'
-		lng : 'lng'
+
+	$_propertyToResourceMapping:
+		position:
+			lat_lng:
+				root.LatLng
 
 	constructor: (
-		@name = null
-		@lat  = 'lat'
-		@lng  = 'lng'
+		@name     = null
+		@position = null
 	) -> super
+
+	$_fromJson: ->
+		super

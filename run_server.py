@@ -7,7 +7,7 @@ from back_end import register_server
 
 if __name__ == '__main__':
     # Mimic production setup for development.
-    settings = {'static_url_path': '', 'static_folder': '../zoo'}
+    settings = {'static_url_path': '', 'static_folder': '../zoo/build/built'}
     app = register_server('/api', settings)
 
     app.debug = True

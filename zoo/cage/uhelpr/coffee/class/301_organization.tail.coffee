@@ -3,6 +3,7 @@ root = window
 lastOrganizationId = 0
 
 root.Organization = class Organization extends root.UhelprResource
+	$_name: 'Organization'
 
 	$_propertyToJsonMapping:
 		address    : 'address' # "501 S. Venice Blvd.",
@@ -31,5 +32,5 @@ root.Organization = class Organization extends root.UhelprResource
 		@website     = null # 'http://www.lapl.org/branches/venice' # 
 	) -> super
 
-	$_initNonJsonMembers: ->
+	$_init: ->
 		@image = "#{ root.imgPath }#{ _.random( 1, 8 ) }.jpg" unless @image?.length > 0

@@ -43,7 +43,7 @@ def register_server(url_prefix='', settings={}):
             'location': [
                 {
                     'name': 'Venice Beach',
-                    'LatLng': {'lat':33.990, "lng":118.459},
+                    'lat_lng': {'lat':33.990, "lng":-118.459},
                     'id': 1
                 }
             ]
