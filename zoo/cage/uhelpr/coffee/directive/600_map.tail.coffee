@@ -17,7 +17,7 @@ class MapController extends root.BaseDirectiveController
 		@GoogleMapsApi.addListener @$scope.map, 'center_changed', _.throttle ( => @$scope.$apply @mapMoved ), 500
 
 		# Listens to our scope's centerLatLng to pan the map to that location
-		@$scope.$watch 'centerLatLng', @centerChanged, yes
+		@$scope.$watch 'centerLatLng', @centerLatLngChanged, yes
 
 		# parse out the pieces of the markerItems attribute of the form '_marker_options_expression_ for _item_expression_ in _collection_'
 		matches = @$attrs.markers.match /^\s*(.+)\s+for\s+(.+)\s+in\s+(.*)\s+track\s+by\s+(.+)\s*$/
@@ -30,6 +30,12 @@ class MapController extends root.BaseDirectiveController
 
 		# Initializes our scope's centerLatLng
 		@$scope.map.then @mapMoved
+
+	centerLatLngChanged: ( newCenterLatLng ) =>
+		unless newCenterLatLng instanceof root.LatLng
+			newCenterLatLng = new root.LatLng newCenterLatLng.lat(), newCenterLatLng.lng()
+
+		@centerChanged newCenterLatLng
 
 	centerChanged: ( newLatLng ) =>
 		@GoogleMapsApi.panMapTo @$scope.map, newLatLng if newLatLng? and not newLatLng.isSame @$scope.map.getCenter()

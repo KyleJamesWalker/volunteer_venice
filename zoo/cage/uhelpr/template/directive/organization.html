@@ -5,7 +5,7 @@
 		ng-class="{ 'active more': organization.selected }"
 	>
 
-		<header class="link relative above inverse coloring no-background">
+		<header class="link relative above inverse coloring no-background hoverable">
 			<div
 				class    ="slow transitions"
 				ng-class ="{ 'more lr-margin': ! organization.selected }"
@@ -22,7 +22,11 @@
 
 						{[{ organization.name }]}
 
-						<span ng-click="OrganizationController.preventDefault( $event )">
+						<span
+							class    ="light small less l-margin inline-block hovered"
+							ng-click ="OrganizationController.preventDefault( $event )"
+						>
+							Show on Map
 							<input
 								type     ="checkbox"
 								ng-model ="organization.shown"

@@ -7,19 +7,43 @@
 			class          ="absolute tl whole-width whole-height"
 			markers        ="SiteState.getMarkerOptions( organization ) for organization in SiteState.$organizations | filter:{ shown: true } track by organization.id"
 		>
+		<!-- organization.markerOptions =  -->
 			<div class="clearfix">
 
-				<!-- <z-image
+				<z-image
 					class ="absolute tl br no-overflow rounded inset-shadow"
 					src   ="{[{ organization.image }]}"
 				></z-image>
 
 				<div class="relative no-overflow rounded inset-shadow less padded">
 
-					<div class="rounded shadow mostly sheer text-shadowed less padded b-margin">
-						<h1 class="inverse coloring no-background">
+					<div class="rounded shadow mostly sheer text-shadowed less padded b-margin inverse coloring no-background">
+
+						<h1>
 							{[{ organization.name }]}
 						</h1>
+
+						<div class="sheer less padded rounded">
+
+							Show on Map
+							<input
+								type     ="checkbox"
+								ng-model ="organization.shown"
+							/>
+
+							<!-- <br/>
+
+							Position: {[{ organization.markerOptions.position.lat() }]}, {[{ organization.markerOptions.position.lng() }]} -->
+
+							<!-- <a
+								class    ="less padded l-margin rounded button"
+								ng-click ="Organizations.$currentLatLng = organization.markerOptions.position"
+							>
+								Center Map Here
+							</a> -->
+
+						</div>
+
 					</div>
 
 					<div
@@ -29,12 +53,7 @@
 						{[{ organization.description }]}
 					</div>
 
-				</div> -->
-
-				<z-organization
-					organization        ="organization"
-					on-map-organization ="Organizations.mappedOrganization = organization"
-				></z-organization>
+				</div>
 
 			</div>
 		</z-map>
