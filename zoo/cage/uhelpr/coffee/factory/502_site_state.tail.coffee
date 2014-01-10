@@ -61,6 +61,7 @@ root.SiteState = class SiteState extends root.BaseFactory
 		@$currentLocation
 
 	getMarkerOptions: ( organization ) ->
+		return null unless organization?
 		markerOptions =
 			title   : organization.name
 			position: @GoogleMapsApi.geocodeAddress( organization.address, @$currentLocation.position ).then ( geocoderResults ) -> markerOptions.position = geocoderResults[ 0 ]?.geometry.location

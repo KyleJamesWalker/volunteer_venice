@@ -10,6 +10,7 @@
 			relative 
 			light very-wide text-shadowed b
 			transitions padded
+			inline-block
 		"
 		ng-class="{
 			more: HeaderController.hovered,
@@ -21,5 +22,13 @@
 			&nbsp;of {[{ SiteState.$currentLocation.name }]}
 		</span>
 	</h3>
+
+	<div class="inline-block text-right padded b text-shadowed relative">
+		Map Only
+		<input
+			type     ="checkbox"
+			ng-model ="SiteState.mapOnly"
+		/>
+	</div>
 
 </div>

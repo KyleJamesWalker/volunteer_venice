@@ -30,6 +30,9 @@ root.Organization = class Organization extends root.UhelprResource
 		@image       = null # '' # 
 		@video       = null # '' # 
 		@website     = null # 'http://www.lapl.org/branches/venice' # 
+
+		@shown    = yes
+		@selected = no
 	) -> super
 
 	$_init: ->

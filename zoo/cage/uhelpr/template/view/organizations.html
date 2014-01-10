@@ -1,22 +1,15 @@
 <div class="organizations absolute whole-width whole-height">
 
-	<!-- <div class="fixed tl whole-width whole-height">
-		<z-image
-			class ="absolute tl whole-width whole-height mostly-transparent"
-			src   ="{[{ SiteState.$currentOrganization.image }]}"
-		></z-image>
-	</div> -->
-
-	<div class="fixed tl whole-width whole-height">
+	<div class="absolute tl whole-width whole-height">
 		<z-map
 			map            ="Organizations.map"
 			center-lat-lng ="Organizations.$currentLatLng"
 			class          ="absolute tl whole-width whole-height"
-			markers        ="SiteState.getMarkerOptions( organization ) for organization in SiteState.$organizations"
+			markers        ="SiteState.getMarkerOptions( organization ) for organization in SiteState.$organizations | filter:{ shown: true } track by organization.id"
 		>
 			<div class="clearfix">
 
-				<z-image
+				<!-- <z-image
 					class ="absolute tl br no-overflow rounded inset-shadow"
 					src   ="{[{ organization.image }]}"
 				></z-image>
@@ -36,28 +29,40 @@
 						{[{ organization.description }]}
 					</div>
 
-				</div>
+				</div> -->
+
+				<z-organization
+					organization        ="organization"
+					on-map-organization ="Organizations.mappedOrganization = organization"
+				></z-organization>
 
 			</div>
 		</z-map>
 		<!-- mostly-transparent -->
 	</div>
 
-	<div class="relative">
-		Latitude: {[{ Organizations.$currentLatLng.lat }]}, longititude: {[{ Organizations.$currentLatLng.lng }]}
-	</div>
+	<z-image
+		class    ="absolute tl whole-width whole-height mostly-transparent"
+		ng-class ="{ gone: SiteState.mapOnly }"
+		src      ="{[{ SiteState.$currentOrganization.image }]}"
+	></z-image>
 
-	<!-- <div class="relative">
+	<div
+		class    ="absolute tl whole-width whole-height overflow-scroll"
+		ng-class ="{ gone: SiteState.mapOnly }"
+	>
 		<div
-			class     ="padded"
-			ng-class  ="{ collapsed: Organizations.mappedOrganization.id && Organizations.mappedOrganization.id != organization.id }"
 			ng-repeat ="organization in SiteState.$organizations"
+			class     ="padded"
+			ng-class  ="{
+				collapsed: Organizations.mappedOrganization.id && Organizations.mappedOrganization.id != organization.id
+			}"
 		>
 			<z-organization
 				organization        ="organization"
 				on-map-organization ="Organizations.mappedOrganization = organization"
 			></z-organization>
 		</div>
-	</div> -->
+	</div>
 
 </div>

@@ -14,16 +14,21 @@
 				<z-image
 					src         ="{[{ organization.image }]}"
 					class       ="absolute whole-height slow transitions"
-					image-class ="{
-						'button-shadow slow transitions': true,
-						'whole-rounded'                 : ! organization.selected,
-						't-rounded'                     : organization.selected
-					}"
+					image-class ="OrganizationController.imageClass"
 				></z-image>
 
 				<div class="relative">
 					<div class="relative title h3 b text-shadowed nowrap overflow-ellipsis">
+
 						{[{ organization.name }]}
+
+						<span ng-click="OrganizationController.preventDefault( $event )">
+							<input
+								type     ="checkbox"
+								ng-model ="organization.shown"
+							/>
+						</span>
+
 					</div>
 				</div>
 

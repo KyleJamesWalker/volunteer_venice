@@ -20,10 +20,11 @@ class MapController extends root.BaseDirectiveController
 		@$scope.$watch 'centerLatLng', @centerChanged, yes
 
 		# parse out the pieces of the markerItems attribute of the form '_marker_options_expression_ for _item_expression_ in _collection_'
-		matches = @$attrs.markers.match /^\s*(.+)\s+for\s+(.+)\s+in\s+(.*)\s*$/
+		matches = @$attrs.markers.match /^\s*(.+)\s+for\s+(.+)\s+in\s+(.*)\s+track\s+by\s+(.+)\s*$/
 		@$markerOptionsGetter      = @$parse( matches[ 1 ] )
 		@$itemSetter               = @$parse( matches[ 2 ] ).assign
-		markerCollectionExpression = matches[ 3 ]
+		markerCollectionExpression =          matches[ 3 ]
+		@$trackByGetter            = @$parse( matches[ 4 ] )
 
 		@$scope.$parent.$watchCollection markerCollectionExpression, @markerItemsChanged
 
@@ -44,40 +45,53 @@ class MapController extends root.BaseDirectiveController
 		# initialize the collection of marker holders if it doesn't already exist
 		@$currentMarkerHolders = {} unless @$currentMarkerHolders?
 
-		# Get the collection of marker holders no longer in the markerItems collection
-		oldMarkerHolders = {}
-		for key, marker of @$currentMarkerHolders
-			oldMarkerHolders[ key ] = marker if not @$currentMarkerHolders[ key ]?
+		markerItemsByKey = {}
 
-		# Destroy all the marker holders no longer in $currentMarkerHolders
-		for key, oldMarkerHolder of oldMarkerHolders
-			@destroyMarkerHolder oldMarkerHolder
-
-		# Handle the markerItems collection the same whether it's an array or an object by constructing an array of keys
+		# Get the new collection of markerItemKeys, handling the markerItems collection the same whether it's an array or an object by constructing an array of keys
 		markerItemKeys = new Array()
 		if angular.isArray markerItems
-			markerItemKeys.push [ 0 .. markerItems.length - 1 ]...
+			for markerItem in markerItems
+				markerItemKeys.push markerItemKey = @getMarkerItemKey markerItem
+				markerItemsByKey[ markerItemKey ] = markerItem
 		else if angular.isObject markerItems
-			( markerItemKeys.push key unless /^\$/.test key ) for key in _.keys markerItems
+			for markerItem of markerItems
+				markerItemKeys.push markerItemKey = @getMarkerItemKey markerItem
+				markerItemsByKey[ markerItemKey ] = markerItem
+
+		currentMarkerKeys = ( key for key, holder of @$currentMarkerHolders )
+		oldMarkerKeys     = _.without currentMarkerKeys, markerItemKeys...
+		newMarkerKeys     = _.without markerItemKeys, currentMarkerKeys...
+
+		# Destroy all the marker holders no longer in $currentMarkerHolders
+		for key in oldMarkerKeys
+			@destroyMarkerHolder key
 
 		# Create marker holders for marker items not yet in the $currentMarkerHolders
-		for key in markerItemKeys
-			@$currentMarkerHolders[ key ] = @createMarkerHolder markerItems[ key ] unless @$currentMarkerHolders[ key ]?
+		for key in newMarkerKeys
+			unless @$currentMarkerHolders[ key ]?
+				@$currentMarkerHolders[ key ] = @createMarkerHolder markerItemsByKey[ key ]
 
-	destroyMarkerHolder: ( markerHolder ) ->
-		markerHolder.infoWindow.close()
-		@$q.when( markerHolder.marker ).then ( marker ) -> marker.setMap null
-		markerHolder.$scope.$destroy()
+	getMarkerItemKey: ( markerItem ) =>
+		context = {}
+		@$itemSetter context, markerItem
+		"#{ @$trackByGetter context }"
+
+	destroyMarkerHolder: ( key ) ->
+		markerHolder = @$currentMarkerHolders[ key ]
+		if markerHolder?
+			markerHolder.$scope.$destroy()
+			@$q.all( [
+				@$q.when( markerHolder.marker     ).then ( ( marker )     -> marker.setMap null ), ( ( rejection ) -> console.log rejection )
+				@$q.when( markerHolder.infoWindow ).then ( ( infoWindow ) -> infoWindow.close() ), ( ( rejection ) -> console.log rejection )
+			] ).then =>
+				root.delete @$currentMarkerHolders, key
 
 	createMarkerHolder: ( markerItem ) ->
 		markerHolder =
-			$scope    : null
-			marker    : null
-			infoWindow: null
-
-		markerHolder.infoWindow = ( infoWindowDeferred = @$q.defer() ).promise.then ( infoWindow ) -> markerHolder.infoWindow = infoWindow
-
-		markerHolder.$scope = ( scopeDeferred = @$q.defer() ).promise.then ( scope ) -> markerHolder.$scope = scope
+			markerItem: markerItem
+			infoWindow: ( infoWindowDeferred = @$q.defer() ).promise.then ( infoWindow ) -> markerHolder.infoWindow = infoWindow
+			$scope    : ( scopeDeferred      = @$q.defer() ).promise.then ( scope      ) -> markerHolder.$scope     = scope
+			marker    : ( markerDeferred     = @$q.defer() ).promise.then ( marker     ) -> markerHolder.marker     = marker
 		
 		# create an infoWindow using the transcluded element clone transcluded with the new markerItem scope
 		@$transclude ( $elementClone, scope ) =>
@@ -92,23 +106,22 @@ class MapController extends root.BaseDirectiveController
 			# get from the new markerItem scope the marker options object using the marker options expression
 			markerOptions = @$markerOptionsGetter markerHolder.$scope
 
-			# create the marker and add it to the map using the marker options object
-			markerHolder.marker = @GoogleMapsApi.makeMarker( @$scope.map, markerOptions ).then ( marker ) =>
-				markerHolder.marker = marker
+			markerDeferred.resolve @GoogleMapsApi.makeMarker @$scope.map, markerOptions
 
-				# hook up the infoWindow's creation and displaying to the marker's click event
-				@GoogleMapsApi.addListener markerHolder.marker, 'click', =>
-					# then when the current infoWindow has been created
-					@$q.when( markerHolder.infoWindow ).then =>
-						# if another infoWindow is already open, close it
-						if @$lastOpenedInfoWindow?
-							@$lastOpenedInfoWindow.close()
+		markerHolder.marker.then =>
+			# hook up the infoWindow's creation and displaying to the marker's click event
+			@GoogleMapsApi.addListener markerHolder.marker, 'click', =>
+				# then when the current infoWindow has been created
+				@$q.when( markerHolder.infoWindow ).then =>
+					# if another infoWindow is already open, close it
+					if @$lastOpenedInfoWindow?
+						@$lastOpenedInfoWindow.close()
 
-						# open it
-						markerHolder.infoWindow.open @$scope.map, markerHolder.marker
+					# open it
+					markerHolder.infoWindow.open @$scope.map, markerHolder.marker
 
-						# and set it to the last opened infoWindow
-						@$lastOpenedInfoWindow = markerHolder.infoWindow
+					# and set it to the last opened infoWindow
+					@$lastOpenedInfoWindow = markerHolder.infoWindow
 
 		markerHolder
 
